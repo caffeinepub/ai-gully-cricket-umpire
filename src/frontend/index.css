@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   Font faces — self-hosted woff2
+───────────────────────────────────────── */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/assets/fonts/Outfit[wght].woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────
+   Design tokens — dark cricket theme
+   Values are raw L C H (no oklch() wrapper)
+───────────────────────────────────────── */
+:root {
+  /* Dark cricket pitch night aesthetic */
+  --background:        0.10 0.025 155;
+  --foreground:        0.92 0.018 80;
+
+  --card:              0.14 0.022 155;
+  --card-foreground:   0.92 0.018 80;
+
+  --popover:           0.14 0.022 155;
+  --popover-foreground: 0.92 0.018 80;
+
+  /* Gold/amber — cricket ball colour */
+  --primary:           0.76 0.18 75;
+  --primary-foreground: 0.10 0.02 155;
+
+  /* Muted dark grass */
+  --secondary:         0.19 0.028 155;
+  --secondary-foreground: 0.75 0.04 80;
+
+  --muted:             0.20 0.022 155;
+  --muted-foreground:  0.58 0.035 150;
+
+  /* Neon teal accent */
+  --accent:            0.84 0.20 175;
+  --accent-foreground: 0.10 0.02 155;
+
+  --destructive:       0.55 0.22 25;
+  --destructive-foreground: 0.95 0.01 80;
+
+  --border:            0.22 0.028 155;
+  --input:             0.22 0.028 155;
+  --ring:              0.76 0.18 75;
+
+  --radius: 0.625rem;
+
+  /* Charts */
+  --chart-1: 0.76 0.18 75;
+  --chart-2: 0.84 0.20 175;
+  --chart-3: 0.65 0.22 25;
+  --chart-4: 0.72 0.18 155;
+  --chart-5: 0.80 0.15 55;
+
+  /* Sidebar */
+  --sidebar:                0.12 0.025 155;
+  --sidebar-foreground:     0.92 0.018 80;
+  --sidebar-primary:        0.76 0.18 75;
+  --sidebar-primary-foreground: 0.10 0.02 155;
+  --sidebar-accent:         0.19 0.028 155;
+  --sidebar-accent-foreground: 0.75 0.04 80;
+  --sidebar-border:         0.22 0.028 155;
+  --sidebar-ring:           0.76 0.18 75;
+}
+
+/* ─────────────────────────────────────────
+   Base styles
+───────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    min-height: 100dvh;
+  }
+}
+
+/* ─────────────────────────────────────────
+   Custom animations
+───────────────────────────────────────── */
+@keyframes no-ball-flash {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.03); }
+}
+
+.animate-no-ball {
+  animation: no-ball-flash 0.6s ease-in-out infinite;
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.animate-scan {
+  animation: scan-line 3s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+  50% { text-shadow: 0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor; }
+}
+
+.animate-glow {
+  animation: glow-pulse 1s ease-in-out infinite;
+}
